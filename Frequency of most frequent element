@@ -1,0 +1,26 @@
+class Solution {
+    public int maxFrequency(int[] nums, int k) {
+        Arrays.sort(nums);   
+
+        int l=0,r=0;        // l to r represents our sliding window 
+        long total=0;
+        int n = nums.length;
+        long ans = 0;
+
+        for(r=0;r<n;r++){      // Keep expanding window towards right one by one in our SORTED array
+
+            total = total +  nums[r] ;
+
+            while( (nums[r] * (r-l+1)) > (total + k) ){
+                total = total- nums[l] ;
+                l++;          // Increase l by 1, if expected sum of window(nums[r] * (r-l+1)) exceeds sum that can be reached after performing k operations(total + k)
+            }
+
+            ans = Math.max( ans, r-l+1 ); 
+        }
+
+        return (int)ans;
+        
+    }
+        
+    }
