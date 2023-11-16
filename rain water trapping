@@ -1,0 +1,25 @@
+class Solution{
+    public int trap(int[] height){
+        int n =height.length;
+        int left [] = new int[n];
+        
+        left[0]=height[0];
+        for(int j=1;j<n;j++){
+            left[j]=Math.max(left[j-1],height[j]);
+        }
+        int right[] = new int[n];
+        right[n-1]=height[n-1];
+        for(int j=n-2;j>=0;j--){
+            right[j]=Math.max(right[j+1],height[j]);
+        }
+        int sumwater=0;
+        for(int j=0;j<n;j++){
+        int sumwater1= Math.min(left[j],right[j])-height[j];
+        sumwater=sumwater+sumwater1;
+        }
+
+        return sumwater;
+
+
+    }
+}
