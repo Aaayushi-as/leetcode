@@ -7,7 +7,7 @@ class Solution {
         int n = nums.length;
         long ans = 0;
 
-        for(r=0;r<n;r++){      // Keep expanding window towards right one by one in our SORTED array
+        for(r=0;r<n;r++){      // Keep expanding window towards right one by one in our SORTED array//
 
             total = total +  nums[r] ;
 
