@@ -1,0 +1,24 @@
+class Solution {
+    public double myPow(double x, int n) {
+    long N = n;
+    double ans = helper( x , Math.abs(N));
+    if(N <0){
+        return 1/ans;
+    } 
+    return ans;
+        
+        
+    }
+    double helper(double x , long n){
+        if(n==0){
+            return 1;
+        }
+        double temp = helper( x , n/2);
+        if(n%2==0){
+            return temp*temp;
+            }
+        else{
+            return x*temp*temp;
+        }
+    }
+}
