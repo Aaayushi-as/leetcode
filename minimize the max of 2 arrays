@@ -1,0 +1,31 @@
+class Solution {
+    public int minimizeSet(int divisor1, int divisor2, int uniqueCnt1, int uniqueCnt2) {
+        long lcm=lcm(divisor1, divisor2);
+        int start=2;
+        int end=Integer.MAX_VALUE;
+
+        while (start < end){
+            int mid=start + (end-start)/2;
+            if(isValid(mid, divisor1, divisor2, uniqueCnt1, uniqueCnt2, lcm)){
+                end=mid;
+            }else{
+                start =mid+1;
+            }
+        }
+        return start;
+
+    }
+    private long lcm(int a, int b){
+        return (a/gcd(a,b))* (long) b; // casting b to long to avoid overflow
+    }
+    private int gcd(int a, int b){
+        if(a==0){
+            return b;
+        }
+        return gcd(b%a, a);
+    }
+    private boolean isValid(int mid, int d1, int d2, int c1, int c2, long lcm){
+        return (mid-mid/d1)>=c1 && (mid-mid/d2)>=c2 && (mid-mid/lcm)>=(c1+c2);
+    }
+    
+}
