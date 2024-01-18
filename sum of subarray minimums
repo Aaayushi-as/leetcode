@@ -1,0 +1,62 @@
+class Solution {
+    public int sumSubarrayMins(int[] arr) {
+        int n = arr.length;
+        int mod = 1000000007;
+        int [] nextsmall = nsmall(arr);
+        int [] prevsmall = psmall(arr);
+        long res =0;
+        for( int i=0;i<n;i++){
+            int first = i - prevsmall[i];
+            int second = nextsmall[i] - i;
+            res = (res+((long)arr[i]*first*second)%mod)%mod;
+
+        }
+        return (int) res;
+       
+
+
+
+        
+    }
+    int[] nsmall(int[] arr){
+        int n = arr.length;
+        Stack <Integer> st = new Stack<>();
+        int[] ans = new int[n];
+        for(int i=n-1;i>=0;i--){
+            while(!st.isEmpty() && arr[i] <arr[ st.peek()]){
+                st.pop();
+            }
+            if(st.isEmpty()){
+                ans[i] = n ;
+
+            }
+            else{
+                ans[i] = st.peek();
+            }
+            st.push(i);
+        }
+        return ans;
+
+
+    }
+    int[] psmall(int arr[]){
+        int n = arr.length;
+        Stack <Integer> stk = new Stack<>();
+        int[] ans = new int[n];
+        for(int i =0;i<arr.length;i++){
+            while(!stk.isEmpty() && arr[i] <= arr[stk.peek()] ){
+                stk.pop();
+
+            }
+            if(stk.isEmpty()){
+                ans[i] = -1;
+            }
+            else{
+                ans[i] = stk.peek();
+            }
+            stk.push(i);
+
+        }
+        return ans;
+    }
+}
