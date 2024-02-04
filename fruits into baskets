@@ -1,0 +1,30 @@
+SLIDING WINDOW
+1 slide over array , map me add rkte rho ,
+2. agar kabhi map ka size 2 se bada ho jaaye
+3. fr i ko aage laao, map se kam krte rho, 
+4. jaise hi frequency zero ho jaaye  -> remove from map
+
+class Solution {
+    public int totalFruit(int[] fruits) {
+        int i=0;
+        int j=0;
+        int ans =0;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        while(j<fruits.length) {
+            // point 1
+            map.put(fruits[j],map.getOrDefault(fruits[j],0)+1);
+            // point 2
+            while(map.size()  > 2) {
+              map.put(fruits[i],map.get(fruits[i])-1);
+              // point 3
+              if(map.get(fruits[i])==0)
+                map.remove(fruits[i]);
+                i++;
+            }
+            // is point pe kabhi bhi size 2 se upar hoga nhi to ans is j - i . jitne elements hai 
+            ans = Math.max(j-i+1,ans);
+            j++;
+        }
+        return ans;
+    }
+}
