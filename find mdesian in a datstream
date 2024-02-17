@@ -1,0 +1,30 @@
+class MedianFinder {
+    
+    PriorityQueue<Integer> min , max;
+
+    public MedianFinder() {
+        min = new PriorityQueue<>();
+        max = new PriorityQueue<>(Collections.reverseOrder());
+    }
+    
+    public void addNum(int num) {
+        if(max.isEmpty() || max.peek() >= num){
+            max.offer(num);
+        }else{
+            min.offer(num);
+        }
+        
+        if(max.size() > min.size() + 1){
+            min.offer(max.poll());          //storing 1 element extra in max for odd case
+        }else if(max.size() < min.size()){
+            max.offer(min.poll());
+        }
+    }
+    
+    public double findMedian() {
+        if (max.size() == min.size())
+            return (min.peek() + max.peek()) / 2.0;
+        else
+            return max.peek();      // as in odd case we stored the extra in max   
+    }
+}
