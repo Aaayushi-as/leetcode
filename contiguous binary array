@@ -1,0 +1,28 @@
+class Solution {
+    public int findMaxLength(int[] nums) {
+        int n = nums.length;
+        int cnt =0;
+        int maxl =0;
+        HashMap<Integer , Integer> mpp = new HashMap<>();
+        mpp.put(0 , -1);
+        for(int i=0;i<n;i++){
+            if(nums[i]==0){
+                cnt += -1;
+            }
+            else{
+                cnt += 1;
+            }
+            if(mpp.containsKey(cnt)){
+                maxl = Math.max(maxl , i-mpp.get(cnt));
+
+            }
+            else{
+                mpp.put(cnt , i);
+            }
+
+        }
+        return maxl;
+     }
+}       
+
+      
